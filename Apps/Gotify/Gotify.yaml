@@ -32,6 +32,11 @@ x-casaos:
         en_us: "We wanted a simple server for sending and receiving messages (in real time per WebSocket). For this, not many open source projects existed and most of the existing ones were abandoned. Also, a requirement was that it can be self-hosted. We know there are many free and commercial push services out there. For more information visit: https://gotify.net/docs/"
     tagline:
         en_us: A simple server for sending and receiving messages
+    tips:
+    before_install:
+        en_us: |
+            Username: casaos
+            Password: casaos
     icon: https://cdn.jsdelivr.net/gh/walkxcode/dashboard-icons/png/gotify.png
     thumbnail: https://cdn.jsdelivr.net/gh/walkxcode/dashboard-icons/png/gotify.png
     index: /
