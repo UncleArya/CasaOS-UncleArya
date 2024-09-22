@@ -1,5 +1,7 @@
 # Backrest
 
+![backrest](https://github.com/user-attachments/assets/887bc692-d78e-478d-9721-b12a8e081149)
+
 **Official Docs:** [https://garethgeorge.github.io/backrest/](https://garethgeorge.github.io/backrest/)
 
 **WebUI Port:** `9898`
