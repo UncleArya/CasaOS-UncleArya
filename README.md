@@ -7,10 +7,15 @@
 A collection of my favourite useful apps I have added to my CasaOS home server.
 
 ---
+
 ## Applications
-| App Name | Description |
-| --- | --- |
-| Backrest | Backrest is a web-accessible backup solution built on top of restic and providing a WebUI which wraps the restic CLI and makes it easy to create repos, browse snapshots, and restore files.|
+
+| App Name                                                                          | Description                                                                                                                                                                                  |
+| --------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [Backrest](https://github.com/UncleArya/CasaOS-UncleArya/tree/main/Apps/Backrest) | Backrest is a web-accessible backup solution built on top of restic and providing a WebUI which wraps the restic CLI and makes it easy to create repos, browse snapshots, and restore files. |
+| [Gotify](https://github.com/UncleArya/CasaOS-UncleArya/tree/main/Apps/Gotify)     | Gotify is a simple server for sending and receiving messages.                                                                                                                                |
+
+---
 
 ## Other CasaOS App Stores:
 
