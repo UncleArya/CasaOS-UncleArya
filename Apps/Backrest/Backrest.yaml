@@ -1,0 +1,56 @@
+name: backrest
+services:
+    backrest:
+        image: garethgeorge/backrest:latest
+        container_name: backrest
+        environment:
+            # Leave these
+            - BACKREST_CONFIG=/config/config.json
+            - BACKREST_DATA=/data
+            - XDG_CACHE_HOME=/cache
+            # Configure to your timezone --> https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
+            - TZ=$TZ
+        hostname: backrest
+        ports:
+            # Change host port if required
+            - target: 9898
+              published: "9898"
+              protocol: tcp
+        restart: always
+        volumes:
+            # /data, /config, /cache are all required
+            - type: bind
+              source: /DATA/AppData/$AppID/data
+              target: /data
+            - type: bind
+              source: /DATA/AppData/$AppID/config
+              target: /config
+            - type: bind
+              source: /DATA/AppData/$AppID/cache
+              target: /cache
+            # optional locations to map to backup additional locations
+            - type: bind
+              source: /var/lib/casaos
+              target: /casaos
+            - type: bind
+              source: /mnt
+              target: /mnt
+            - type: bind
+              source: /media
+              target: /media
+        network_mode: bridge
+        privileged: false
+x-casaos:
+    main: backrest
+    author: UncleArya
+    category: UncleArya
+    description:
+        en_us: "Backrest is a web-accessible backup solution built on top of restic and providing a WebUI which wraps the restic CLI and makes it easy to create repos, browse snapshots, and restore files. Additionally, Backrest can run in the background and take an opinionated approach to scheduling snapshots and orchestrating repo health operations. For more information visit: https://garethgeorge.github.io/backrest/"
+    tagline:
+        en_us: Backrest is a web-accessible backup solution built on top of restic and providing a WebUI which wraps the restic CLI and makes it easy to create repos, browse snapshots, and restore files.
+    icon: https://styles.redditmedia.com/t5_2dcmms/styles/communityIcon_yde1hhp322f61.jpeg?format=pjpg&s=4b710042d6af605a12450d2c51a2b4836211111d
+    thumbnail: https://styles.redditmedia.com/t5_2dcmms/styles/communityIcon_yde1hhp322f61.jpeg?format=pjpg&s=4b710042d6af605a12450d2c51a2b4836211111d
+    index: /
+    port_map: "9898"
+    title:
+        en_us: Backrest
