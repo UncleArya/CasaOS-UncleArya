@@ -1,5 +1,7 @@
 # Gotify
 
+![gotify](https://github.com/user-attachments/assets/247a1974-9e89-4107-8da1-ff1b74e06062)
+
 **Official Docs:** [https://gotify.net/docs/index](https://gotify.net/docs/index)
 
 **WebUI Port:** `7070`
