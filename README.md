@@ -9,7 +9,7 @@ A collection of my favourite useful apps I have added to my CasaOS home server.
 **Uncle Arya AppStore URL**
 
 ```
-https://github.com/UncleArya/CasaOS-UncleArya/archive/refs/tags/latest.zip
+https://github.com/UncleArya/CasaOS-UncleArya/archive/refs/heads/main.zip
 ```
 
 ---
