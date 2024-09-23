@@ -28,6 +28,10 @@ x-casaos:
     main: gotify
     author: UncleArya
     category: UncleArya
+    developer: Gotify
+    architectures:
+        - amd64
+        - arm64
     description:
         en_us: "We wanted a simple server for sending and receiving messages (in real time per WebSocket). For this, not many open source projects existed and most of the existing ones were abandoned. Also, a requirement was that it can be self-hosted. We know there are many free and commercial push services out there. For more information visit: https://gotify.net/docs/"
     tagline:
@@ -39,7 +43,6 @@ x-casaos:
             Password: casaos
     icon: https://cdn.jsdelivr.net/gh/walkxcode/dashboard-icons/png/gotify.png
     thumbnail: https://cdn.jsdelivr.net/gh/walkxcode/dashboard-icons/png/gotify.png
-    index: /
     port_map: "7070"
     title:
         en_us: Gotify
