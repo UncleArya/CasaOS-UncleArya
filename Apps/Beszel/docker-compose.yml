@@ -1,0 +1,77 @@
+name: beszel
+services:
+    beszel:
+        image: henrygd/beszel:latest
+        container_name: beszel
+        ports:
+            # Change host port if required
+            - mode: ingress
+              target: 8090
+              published: "8090"
+              protocol: tcp
+        restart: unless-stopped
+        volumes:
+            - type: bind
+              source: /DATA/AppData/$AppID/data
+              target: /beszel_data
+              bind:
+                  create_host_path: true
+        x-casaos:
+            ports:
+                - container: "8090"
+                  description:
+                      en_us: "Container Port: 8090"
+            volumes:
+                - container: /beszel_data
+                  description:
+                      en_us: Beszel Data
+        networks:
+            - default
+        privileged: false
+    beszel-agent:
+        image: henrygd/beszel-agent:latest
+        container_name: beszel-agent
+        environment:
+            - KEY= # your key here
+            - PORT=45876
+        hostname: beszel-agent
+        restart: unless-stopped
+        volumes:
+            - type: bind
+              source: /var/run/docker.sock
+              target: /var/run/docker.sock
+        x-casaos:
+            envs:
+                - container: KEY
+                  description:
+                      en_us: ""
+                - container: PORT
+                  description:
+                      en_us: ""
+                - container: PATH
+                  description:
+                      en_us: ""
+            image: ""
+            volumes:
+                - container: /var/run/docker.sock
+                  description:
+                      en_us: ""
+        network_mode: host
+        privileged: false
+networks:
+    default:
+        name: beszel_default
+x-casaos:
+    main: beszel
+    author: UncleArya
+    category: UncleArya
+    description:
+        en_us: "A lightweight server resource monitoring hub with historical data, docker stats, and alerts. For more information visit: https://github.com/henrygd/beszel"
+    tagline:
+        en_us: A lightweight server resource monitoring hub with historical data, docker stats, and alerts.
+    icon: https://cdn.jsdelivr.net/gh/bigbeartechworld/big-bear-casaos/Apps/beszel/logo.jpg
+    thumbnail: https://cdn.jsdelivr.net/gh/bigbeartechworld/big-bear-casaos/Apps/beszel/logo.jpg
+    port_map: "8090"
+    store_app_id: beszel
+    title:
+        custom: Beszel

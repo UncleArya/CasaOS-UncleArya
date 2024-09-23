@@ -1,0 +1,63 @@
+name: picsur
+services:
+    picsur:
+        image: ghcr.io/caramelfur/picsur:latest
+        container_name: picsur
+        environment:
+            - PICSUR_ADMIN_PASSWORD=admin
+            - PICSUR_DB_DATABASE=picsur
+            - PICSUR_DB_HOST=picsur_db
+            - PICSUR_DB_PASSWORD=picsur
+            - PICSUR_DB_PORT=5432
+            - PICSUR_DB_USERNAME=picsur
+            - PICSUR_HOST=0.0.0.0
+            - PICSUR_PORT=8080
+            - PICSUR_STATIC_FRONTEND_ROOT=/picsur/frontend/dist
+            - PICSUR_MAX_FILE_SIZE=20480000 # 20 MB max - change if desired
+        hostname: picsur
+        ports:
+            # Change host port if required
+            - target: 8080
+              published: "8282"
+              protocol: tcp
+        restart: unless-stopped
+        volumes:
+            - type: bind
+              source: /DATA/AppData/$AppID/picsur-data
+              target: /picsur-data
+        networks:
+            - picsur
+        privileged: false
+    picsur_postgres:
+        container_name: picsur_db
+        environment:
+            - POSTGRES_DB=picsur
+            - POSTGRES_PASSWORD=picsur
+            - POSTGRES_USER=picsur
+        hostname: picsur_postgres
+        image: postgres:14-alpine
+        restart: unless-stopped
+        volumes:
+            - type: bind
+              source: /DATA/AppData/$AppID/picsur-data
+              target: /var/lib/postgresql/data
+        networks:
+            - picsur
+        privileged: false
+networks:
+    picsur:
+        name: picsur
+x-casaos:
+    main: picsur
+    author: UncleArya
+    category: UncleArya
+    description:
+        en_us: "I couldn't really find any open source project that allowed you to easily host images. So I decided to create one. It feels like a hybrid between Imgur and Pastebin. For more information visit: https://github.com/CaramelFur/Picsur"
+    tagline:
+        en_us: Totally not an Imgur clone.
+    icon: https://raw.githubusercontent.com/CaramelFur/Picsur/refs/heads/master/branding/logo/picsur-512.png
+    thumbnail: https://raw.githubusercontent.com/CaramelFur/Picsur/refs/heads/master/branding/logo/picsur-512.png
+    port_map: "8282"
+    store_app_id: picsur
+    title:
+        custom: Picsur

@@ -1,0 +1,72 @@
+name: watchtower
+services:
+    watchtower:
+        image: containrrr/watchtower:latest
+        container_name: watchtower
+        cap_add:
+            - AUDIT_WRITE
+            - CHOWN
+            - DAC_OVERRIDE
+            - FOWNER
+            - FSETID
+            - KILL
+            - MKNOD
+            - NET_BIND_SERVICE
+            - NET_RAW
+            - SETFCAP
+            - SETGID
+            - SETPCAP
+            - SETUID
+            - SYS_CHROOT
+        environment:
+            - TZ=$TZ
+            # All options listed here: https://containrrr.dev/watchtower/arguments/
+            - WATCHTOWER_CLEANUP=true
+            - WATCHTOWER_INCLUDE_STOPPED=true
+            - WATCHTOWER_SCHEDULE=0 0 4 * * 0
+            # Option to include Gotify notifications
+            - WATCHTOWER_NOTIFICATIONS=gotify
+            - WATCHTOWER_NOTIFICATION_GOTIFY_TOKEN=
+            - WATCHTOWER_NOTIFICATION_GOTIFY_URL=
+        restart: unless-stopped
+        volumes:
+            - type: bind
+              source: /var/run/docker.sock
+              target: /var/run/docker.sock
+        x-casaos:
+            envs:
+                - container: WATCHTOWER_CLEANUP
+                  description:
+                      en_us: ""
+                - container: WATCHTOWER_INCLUDE_STOPPED
+                  description:
+                      en_us: ""
+                - container: WATCHTOWER_POLL_INTERVAL
+                  description:
+                      en_us: ""
+                - container: WATCHTOWER_REVIVE_STOPPED
+                  description:
+                      en_us: ""
+                - container: PATH
+                  description:
+                      en_us: ""
+            image: ""
+            volumes:
+                - container: /var/run/docker.sock
+                  description:
+                      en_us: ""
+        network_mode: bridge
+        privileged: false
+x-casaos:
+    main: watchtower
+    author: UncleArya
+    category: UncleArya
+    description:
+        en_us: "With watchtower you can update the running version of your containerized app simply by pushing a new image to the Docker Hub or your own image registry. Watchtower will pull down your new image, gracefully shut down your existing container and restart it with the same options that were used when it was deployed initially. For more information visit: https://containrrr.dev/watchtower/"
+    tagline:
+        en_us: A container-based solution for automating Docker container base image updates.
+    icon: https://containrrr.dev/watchtower/images/logo-450px.png
+    thumbnail: https://containrrr.dev/watchtower/images/logo-450px.png
+    store_app_id: watchtower
+    title:
+        en_us: Watchtower

@@ -1,0 +1,64 @@
+name: kopia
+services:
+    kopia:
+        image: kopia/kopia:latest
+        container_name: kopia
+        environment:
+            # Change username & password
+            - KOPIA_PASSWORD=casaos
+            - USER=root
+        hostname: kopia
+        ports:
+            # Change host port if required
+            - target: 51515
+              published: "51515"
+              protocol: tcp
+        restart: always
+        volumes:
+            # /config, /cache, /logs are all required
+            - type: bind
+              source: /DATA/AppData/$AppID/config
+              target: /app/config
+            - type: bind
+              source: /DATA/AppData/$AppID/cache
+              target: /app/cache
+            - type: bind
+              source: /DATA/AppData/$AppID/logs
+              target: /app/logs
+            # optional locations to map to backup additional locations
+            - type: bind
+              source: /var/lib/casaos
+              target: /casaos
+            - type: bind
+              source: /mnt
+              target: /mnt
+            - type: bind
+              source: /media
+              target: /media
+        command:
+            - server
+            - start
+            - --insecure
+            - --address=0.0.0.0:51515
+            - --server-username=casaos
+            - --server-password=casaos
+        network_mode: bridge
+        privileged: false
+x-casaos:
+    main: kopia
+    author: UncleArya
+    category: UncleArya
+    description:
+        en_us: "Kopia is a fast and secure open-source backup/restore tool that allows you to create encrypted snapshots of your data and save the snapshots to remote or cloud storage of your choice, to network-attached storage or server, or locally on your machine. Kopia does not 'image' your whole machine. Rather, Kopia allows you to backup/restore any and all files/directories that you deem are important or critical. For more information visit: https://kopia.io/docs/"
+    tagline:
+        en_us: Encrypted, Compressed, and Deduplicated Backups Using the Cloud Storage You Pick.
+    icon: https://raw.githubusercontent.com/kopia/kopia/master/icons/kopia.svg
+    thumbnail: https://raw.githubusercontent.com/kopia/kopia/master/icons/kopia.svg
+    port_map: "51515"
+    store_app_id: kopia
+    tips:
+        en_us: |-
+            KOPIA_PASSWORD: {repository_password}
+            USER: root
+    title:
+        en_us: Kopia

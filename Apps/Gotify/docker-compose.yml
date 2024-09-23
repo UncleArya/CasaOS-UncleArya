@@ -37,10 +37,10 @@ x-casaos:
     tagline:
         en_us: A simple server for sending and receiving messages
     tips:
-    before_install:
-        en_us: |
-            Username: casaos
-            Password: casaos
+        before_install:
+            en_us: |
+                Username: casaos
+                Password: casaos
     icon: https://cdn.jsdelivr.net/gh/walkxcode/dashboard-icons/png/gotify.png
     thumbnail: https://cdn.jsdelivr.net/gh/walkxcode/dashboard-icons/png/gotify.png
     port_map: "7070"

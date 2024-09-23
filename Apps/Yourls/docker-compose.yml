@@ -1,0 +1,59 @@
+name: yourls
+services:
+    yourls:
+        image: yourls:latest
+        container_name: yourls
+        depends_on:
+            mysql:
+                condition: service_started
+                required: true
+        environment:
+            YOURLS_DB_PASS: casaos
+            YOURLS_USER: casaos
+            YOURLS_PASS: casaos
+            YOURLS_SITE: https://your.url.here # change to your domain
+        hostname: yourls
+        links:
+            - mysql
+        ports:
+            # Change host port if required
+            - target: 80
+              published: "818"
+              protocol: tcp
+        restart: unless-stopped
+        network_mode: bridge
+        privileged: false
+    mysql:
+        image: mysql:latest
+        container_name: mysql-yourls
+        environment:
+            MYSQL_DATABASE: yourls
+            MYSQL_PASSWORD: casaos
+            MYSQL_ROOT_PASSWORD: casaos
+            MYSQL_USER: casaos
+        hostname: mysql-yourls
+        restart: unless-stopped
+        volumes:
+            - type: bind
+              source: /DATA/AppData/$AppID/var/lib/mysql
+              target: /var/lib/mysql
+        network_mode: bridge
+        privileged: false
+x-casaos:
+    main: yourls
+    author: UncleArya
+    category: UncleArya
+    description:
+        en_us: "YOURLS is a powerful set of PHP scripts that empowers you to run Your Own URL Shortener, on your server. With YOURLS, you have complete control over your links, detailed statistics, plugin support, and more, all wrapped in a free and open-source package. For more information visit: https://yourls.org/docs"
+    tagline:
+        en_us: The de facto standard self-hosted URL shortener.
+    tips:
+        before_install:
+            en_us: |
+                webgui is located at :818/admin
+    icon: https://yourls.org/assets/images/logo.svg
+    thumbnail: https://yourls.org/assets/images/logo.svg
+    port_map: "818"
+    store_app_id: yourls
+    title:
+        en_us: yourls
