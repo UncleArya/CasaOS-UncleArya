@@ -1,4 +1,6 @@
-# Beszel
+ Beszel
+
+#![beszel](https://github.com/user-attachments/assets/b2918d8a-bc91-42aa-bbd2-c2f7f95f7746)
 
 **Official Docs:** [https://github.com/henrygd/beszel](https://github.com/henrygd/beszel)
 
